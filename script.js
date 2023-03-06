@@ -30,9 +30,9 @@ window.addEventListener("DOMContentLoaded", () => {
             setTimeout(function() {
                 game.display(CONTAINER);
             }, ANIMATIONTIMEMOVE);
-            /* setTimeout(function() {
+            setTimeout(function() {
                 return;
-            }, ANIMATIONTIMEPOP); */
+            }, ANIMATIONTIMEPOP);
         }
     })
 });
