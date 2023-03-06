@@ -8,11 +8,10 @@ const NUMTOIMAGE = {
     16: "rust",
     32: "ruby",
     64: "swift",
-    128: "sql",
-    256: "java",
-    512: "python",
-    1024: "ts",
-    2048: "js"
+    128: "java",
+    256: "python",
+    512: "ts",
+    1024: "js"
 };
 
 // 100 px for the image, 10 px for the margin
@@ -45,6 +44,9 @@ class Game {
             // stores the available square for movement
             this.moveUpDown(method);
         }
+        else {
+            this.moveLeftRight(method);
+        }
 
         // makes new square
         if (!this.newSquare()) {
@@ -56,6 +58,91 @@ class Game {
         
     }
 
+    moveLeftRight(move) {
+        // assigns starter values depending on the type of movement
+        let xSign, start, end;
+        if (move === "left") {
+            xSign = 1;
+            start = 1;
+            end = 4;
+        }
+        else {
+            xSign = -1;
+            start = 2;
+            end = -1;
+        }
+
+        // goes through every column
+        for (let y = 0; y < 4; y++) {
+
+            // determines where the starting square is
+            let startX = move === "left" ? 0 : 3;
+
+            // stores the available square
+            let available = {value: this.board[y][startX], x: startX, y: y};
+
+            // goes through everything in the column (going up or going down)
+            for (let x = start; move === "left" ? x < end : x > end; x += xSign) {
+                
+                // stores the value in the spot
+                let val = this.board[y][x];
+
+                // if the value is 1 (empty), then skip
+                if (val === 1) {
+                    continue;
+                }
+
+                // if the values match, combine
+                else if (val === available.value) {
+                    // perform move and increment value
+                    this.board[y][x] = 1;
+                    this.board[available.y][available.x] *= 2;
+
+                    // performs animation and adds to pops
+                    animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
+                    this.pops.push({x: available.x, y: available.y});
+
+                    // resets avaiable value
+                    available.value = 1;
+                    available.x += xSign;
+                }
+                
+                // if they don't match, and the value is not 1, then check if the available is empty - if it is, move into it
+                else if (available.value === 1) {
+                    // perform move to available square
+                    this.board[y][x] = 1;
+                    this.board[available.y][available.x] = val;
+
+                    // performs animation
+                    animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
+
+                    // moves the available square forwards
+                    available.value = 1;
+                    available.x += xSign;
+                }
+
+                // finally, check if the spot in front of the available is empty 
+                else if (this.board[available.y][available.x + xSign] === 1) {
+                    // perform move to available square
+                    this.board[y][x] = 1;
+                    this.board[available.y][available.x + xSign] = val;
+
+                    // performs animation
+                    animateMovement(getId(y, x), {y: available.y, x: available.x + xSign}, ANIMATIONTIMEMOVE);
+
+                    // changes avaible value
+                    available.value = 1;
+                    available.x += 2 * xSign;
+                } 
+                
+                // otherwise, move the available forwards
+                else {
+                    available.value = this.board[available.y][available.x + xSign];
+                    available.x += xSign;
+                }
+            }
+        }
+    }
     moveUpDown(move) {
 
         // assigns starter values depending on the type of movement
