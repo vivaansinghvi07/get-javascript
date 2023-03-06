@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (event) => {
 
         // stores the possible event key names
-        var moves = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "s", "a", "d"];
+        var moves = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "s", "a", "d", "W", "S", "A", "D"];
 
         // finds the index of the key press
         var index = moves.findIndex((option) => {
