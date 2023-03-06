@@ -41,9 +41,9 @@ class Game {
     move (method) {
 
         // controls up-down movement
-        if (method === "up") {
+        if (method === "up" || method === "down") {
             // stores the available square for movement
-            this.moveUp();
+            this.moveUpDown(method);
         }
 
         // makes new square
@@ -56,13 +56,24 @@ class Game {
         
     }
 
-    moveUp() {
+    moveUpDown(move) {
 
+        let ySign, start, end;
+        if (move === "up") {
+            ySign = 1;
+            start = 1;
+            end = 4;
+        }
+        else {
+            ySign = -1;
+            start = 2;
+            end = -1;
+        }
         // goes through every column
         for (let x = 0; x < 4; x++) {
             // stores the available square
-            let available = {value: this.board[0][x], x: x, y: 0};
-            for (let y = 1; y < 4; y++) {
+            let available = {value: this.board[move === "up" ? 0 : 3][x], x: x, y: move === "up" ? 0 : 3};
+            for (let y = start; move === "up" ? y < end : y > end; y += ySign) {
                 let val = this.board[y][x];
                 if (val === 1) {
                     continue;
@@ -78,7 +89,7 @@ class Game {
 
                     // resets avaiable value
                     available.value = 1;
-                    available.y += 1;
+                    available.y += ySign;
                 }
                 else if (available.value === 1) {
                     // perform move to available square
@@ -90,28 +101,28 @@ class Game {
 
                     // moves the available square forwards
                     available.value = 1;
-                    available.y += 1;
+                    available.y += ySign;
                 }
-                else if (this.board[available.y + 1][x] === 1) {
+                else if (this.board[available.y + ySign][x] === 1) {
                     // perform move to available square
                     this.board[y][x] = 1;
-                    this.board[available.y + 1][x] = val;
+                    this.board[available.y + ySign][x] = val;
 
                     // performs animation
-                    animateMovement(getId(y, x), {y: available.y + 1, x: available.x}, ANIMATIONTIMEMOVE);
+                    animateMovement(getId(y, x), {y: available.y + ySign, x: available.x}, ANIMATIONTIMEMOVE);
 
                     // changes avaible value
                     available.value = 1;
-                    available.y += 2;
+                    available.y += 2 * ySign;
                 } 
                 else {
-                    available.value = this.board[available.y + 1][available.x];
-                    available.y += 1;
+                    available.value = this.board[available.y + ySign][available.x];
+                    available.y += ySign;
                 }
             }
         }
-        console.log(this.board);
     }
+
 
     // places a random 2 or 4 on the board
     newSquare () {
