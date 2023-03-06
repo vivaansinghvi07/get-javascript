@@ -58,6 +58,7 @@ class Game {
 
     moveUpDown(move) {
 
+        // assigns starter values depending on the type of movement
         let ySign, start, end;
         if (move === "up") {
             ySign = 1;
@@ -69,15 +70,28 @@ class Game {
             start = 2;
             end = -1;
         }
+
         // goes through every column
         for (let x = 0; x < 4; x++) {
+
+            // determines where the starting square is
+            let startY = move === "up" ? 0 : 3;
+
             // stores the available square
-            let available = {value: this.board[move === "up" ? 0 : 3][x], x: x, y: move === "up" ? 0 : 3};
+            let available = {value: this.board[startY][x], x: x, y: startY};
+
+            // goes through everything in the column (going up or going down)
             for (let y = start; move === "up" ? y < end : y > end; y += ySign) {
+                
+                // stores the value in the spot
                 let val = this.board[y][x];
+
+                // if the value is 1 (empty), then skip
                 if (val === 1) {
                     continue;
                 }
+
+                // if the values match, combine
                 else if (val === available.value) {
                     // perform move and increment value
                     this.board[y][x] = 1;
@@ -91,6 +105,8 @@ class Game {
                     available.value = 1;
                     available.y += ySign;
                 }
+                
+                // if they don't match, and the value is not 1, then check if the available is empty - if it is, move into it
                 else if (available.value === 1) {
                     // perform move to available square
                     this.board[y][x] = 1;
@@ -103,6 +119,8 @@ class Game {
                     available.value = 1;
                     available.y += ySign;
                 }
+
+                // finally, check if the spot in front of the available is empty 
                 else if (this.board[available.y + ySign][x] === 1) {
                     // perform move to available square
                     this.board[y][x] = 1;
@@ -115,6 +133,8 @@ class Game {
                     available.value = 1;
                     available.y += 2 * ySign;
                 } 
+                
+                // otherwise, move the available forwards
                 else {
                     available.value = this.board[available.y + ySign][available.x];
                     available.y += ySign;
