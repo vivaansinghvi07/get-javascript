@@ -16,7 +16,7 @@ const NUMTOIMAGE = {
 };
 
 // 100 px for the image, 10 px for the margin
-const sizeMultiplier = 110;
+const SIZEMULTIPLIER = 110;
 
 // sets the time for animation
 const ANIMATIONTIMEMOVE = 100;
@@ -39,8 +39,78 @@ class Game {
     
     // controls movement with arrow keys
     move (method) {
-        this.newSquare();
+
+        // controls up-down movement
+        if (method === "up") {
+            // stores the available square for movement
+            this.moveUp();
+        }
+
+        // makes new square
+        if (!this.newSquare()) {
+            // TODO: code game over
+            console.log("Lost");
+            return false;
+        }
+
         
+    }
+
+    moveUp() {
+
+        // goes through every column
+        for (let x = 0; x < 4; x++) {
+            // stores the available square
+            let available = {value: this.board[0][x], x: x, y: 0};
+            for (let y = 1; y < 4; y++) {
+                let val = this.board[y][x];
+                if (val === 1) {
+                    continue;
+                }
+                else if (val === available.value) {
+                    // perform move and increment value
+                    this.board[y][x] = 1;
+                    this.board[available.y][available.x] *= 2;
+
+                    // performs animation and adds to pops
+                    animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
+                    this.pops.push({x: available.x, y: available.y});
+
+                    // resets avaiable value
+                    available.value = 1;
+                    available.y += 1;
+                }
+                else if (available.value === 1) {
+                    // perform move to available square
+                    this.board[y][x] = 1;
+                    this.board[available.y][x] = val;
+
+                    // performs animation
+                    animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
+
+                    // moves the available square forwards
+                    available.value = 1;
+                    available.y += 1;
+                }
+                else if (this.board[available.y + 1][x] === 1) {
+                    // perform move to available square
+                    this.board[y][x] = 1;
+                    this.board[available.y + 1][x] = val;
+
+                    // performs animation
+                    animateMovement(getId(y, x), {y: available.y + 1, x: available.x}, ANIMATIONTIMEMOVE);
+
+                    // changes avaible value
+                    available.value = 1;
+                    available.y += 2;
+                } 
+                else {
+                    available.value = this.board[available.y + 1][available.x];
+                    available.y += 1;
+                }
+            }
+        }
+        console.log(this.board);
     }
 
     // places a random 2 or 4 on the board
@@ -72,6 +142,8 @@ class Game {
         // adds spot to the pop
         this.pops.push(spot);
 
+        return true;
+
     }
 
     // displays the board onto the container
@@ -99,8 +171,8 @@ class Game {
                 let filename = NUMTOIMAGE[this.board[y][x]];
 
                 // gets the margins of the image relative to the rest of the board: img size: 100px, margin: 10px
-                let top = y * (sizeMultiplier); // distance from top
-                let left = x * (sizeMultiplier); // distance from left
+                let top = y * (SIZEMULTIPLIER); // distance from top
+                let left = x * (SIZEMULTIPLIER); // distance from left
                 
                 // creates a new image with specified characteristics
                 let img = document.createElement("img");
@@ -117,7 +189,15 @@ class Game {
 
         // goes through everything that needs to be popped
         this.pops.forEach((element) => {
-            animatePop(element.y + "" + element.x);
+            animatePop(element.y + "" + element.x, ANIMATIONTIMEPOP);
         });
+
+        // clears pops 
+        this.pops = new Array();
     }
+}
+
+// returns the two numbers combined into a string
+function getId(y, x) {
+    return y + "" + x;
 }
