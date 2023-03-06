@@ -32,6 +32,13 @@ class Game {
         // clears the container
         container.innerHTML = null;
 
+        // adds the board to the container
+        let board = document.createElement("img");
+        board.setAttribute("src", "board.png");
+        board.setAttribute("class", "board");
+        container.appendChild(board);
+        
+
         // goes through every square on the board
         for (let y = 0; y < 4; y++) {
             for (let x = 0; x < 4; x++) {
@@ -39,7 +46,7 @@ class Game {
                 // gets the image being looked at
                 let filename = NUMTOIMAGE[this.board[y][x]];
 
-                // gets the margins of the image relative to the rest of the board: img size: 100, margin: 10px
+                // gets the margins of the image relative to the rest of the board: img size: 100px, margin: 10px
                 let top = y * (110); // distance from top
                 let left = x * (110); // distance from left
                 
