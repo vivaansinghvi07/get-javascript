@@ -114,5 +114,10 @@ class Game {
                 container.appendChild(img);
             }
         }
+
+        // goes through everything that needs to be popped
+        this.pops.forEach((element) => {
+            animatePop(element.y + "" + element.x);
+        });
     }
 }
