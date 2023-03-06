@@ -37,7 +37,6 @@ class Game {
         board.setAttribute("src", "board.png");
         board.setAttribute("class", "board");
         container.appendChild(board);
-        
 
         // goes through every square on the board
         for (let y = 0; y < 4; y++) {
