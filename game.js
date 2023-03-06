@@ -22,7 +22,7 @@ const ANIMATIONTIMEMOVE = 100;
 const ANIMATIONTIMEPOP = 80;
 
 // sets constant image width
-const imageWidth = 80;
+const IMAGEWIDTH = 80;
 
 class Game {
     constructor() {
