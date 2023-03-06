@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (event) => {
 
         // stores the possible event key names
-        var moves = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+        var moves = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "s", "a", "d"];
 
         // finds the index of the key press
         var index = moves.findIndex((option) => {
@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // moves the board based on the key press
         else {
-            game.move(["up", "down", "left", "right"][index]);
+            game.move(["up", "down", "left", "right"][index % 4]);
             game.display(CONTAINER);
         }
     })
