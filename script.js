@@ -29,7 +29,10 @@ window.addEventListener("DOMContentLoaded", () => {
             game.move(["up", "down", "left", "right"][index % 4]);
             setTimeout(function() {
                 game.display(CONTAINER);
-            }, animationTime);
+            }, ANIMATIONTIMEMOVE);
+            /* setTimeout(function() {
+                return;
+            }, ANIMATIONTIMEPOP); */
         }
     })
 });

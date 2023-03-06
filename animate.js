@@ -1,30 +1,22 @@
 // animates the element in id, in a certain direction and time (in milliseconds)
-function animate(id, direction, distance, time) {
+function animateMovement(id, newCoords, time) {
     $(document).ready(function() {
 
-        // gets the type of movement
-        let type = ["left", "right", "up", "down"].findIndex((element) => {
-            if (element === direction) {
-                return true;
-            }
-        });
-
-        // assigns the distances
-        let distances = [0, 0, 0, 0];
-        
-        // goes through each element in the distances array and adjusts the distance moved accordingly 
-        distances.forEach((element, index, array) => {
-            if (index === type) {
-                array[index] = distance;
-            }
-            array[index] += "px";
-        });
-
-        // assigns distances
-        let [distLeft, distRight, distUp, distDown] = distances;
-
         // animates the movement
-        $("#" + id).animate({left: distLeft, right: distRight, up: distUp, down: distDown}, time);
+        $("#" + id).animate({left: newCoords.x + "px", top: newCoords.y + "px"}, time);
+        
+    });
+}
+
+function animatePop(id, time) {
+    $(document).ready(function() {
+
+        console.log("that");
+
+        // animates the inflation
+        $("#" + id).animate({width: imageWidth + 10, height: imageWidth + 10, left: "5px", up: "5px"}, time/2);
+        // animates the deflation
+        $("#" + id).animate({width: imageWidth, height: imageWidth, right: "5px", down: "5px"}, time/2);
         
     });
 }

@@ -1,4 +1,5 @@
 // TODO: Make the move move the closest one to the edge: for example if you move left you move the one thats the smallest index left first, then whatever else is available
+// create an array of ids that need to be popped in the display and pop them in the display function after everything is done
 
 const NUMTOIMAGE = {
     2: "c",
@@ -18,7 +19,11 @@ const NUMTOIMAGE = {
 const sizeMultiplier = 110;
 
 // sets the time for animation
-const animationTime = 100;
+const ANIMATIONTIMEMOVE = 100;
+const ANIMATIONTIMEPOP = 80;
+
+// sets constant image width
+const imageWidth = 80;
 
 class Game {
     constructor() {
@@ -32,7 +37,7 @@ class Game {
     // controls movement with arrow keys
     move(method) {
         this.board[randInt(0, 4)][randInt(0, 4)] = Math.pow(2, randInt(0, 12));
-        animate("32", method, 110, animationTime);
+        animateMovement("32", {x: 110 * 2, y: 110 * 1}, ANIMATIONTIMEMOVE);
     }
 
     // displays the board onto the container
