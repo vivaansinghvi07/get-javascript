@@ -26,6 +26,7 @@ class Game {
         console.log(this.board);
     }
 
+    // displays the board onto the container
     display(container) {
 
         // clears the container
