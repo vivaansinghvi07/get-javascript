@@ -1,3 +1,5 @@
+// TODO: Make the move move the closest one to the edge: for example if you move left you move the one thats the smallest index left first, then whatever else is available
+
 const NUMTOIMAGE = {
     2: "c",
     4: "cpp",
@@ -12,6 +14,12 @@ const NUMTOIMAGE = {
     2048: "js"
 };
 
+// 100 px for the image, 10 px for the margin
+const sizeMultiplier = 110;
+
+// sets the time for animation
+const animationTime = 100;
+
 class Game {
     constructor() {
         // creates the board for play
@@ -21,9 +29,10 @@ class Game {
                       [1, 1, 1, 1]];
     }
     
+    // controls movement with arrow keys
     move(method) {
         this.board[randInt(0, 4)][randInt(0, 4)] = Math.pow(2, randInt(0, 12));
-        console.log(this.board);
+        animate("32", method, 110, animationTime);
     }
 
     // displays the board onto the container
@@ -51,13 +60,14 @@ class Game {
                 let filename = NUMTOIMAGE[this.board[y][x]];
 
                 // gets the margins of the image relative to the rest of the board: img size: 100px, margin: 10px
-                let top = y * (110); // distance from top
-                let left = x * (110); // distance from left
+                let top = y * (sizeMultiplier); // distance from top
+                let left = x * (sizeMultiplier); // distance from left
                 
                 // creates a new image with specified characteristics
                 let img = document.createElement("img");
                 img.setAttribute("src", "/imgs/" + filename + ".png");
                 img.setAttribute("class", "image");
+                img.setAttribute("id", y + "" + x);
                 img.style.top = String(top) + "px";
                 img.style.left = String(left) + "px";
 
