@@ -32,12 +32,46 @@ class Game {
                       [1, 1, 1, 1],
                       [1, 1, 1, 1],
                       [1, 1, 1, 1]];
+
+        // initializes a new array of things that will be pop animated
+        this.pops = new Array();
     }
     
     // controls movement with arrow keys
-    move(method) {
-        this.board[randInt(0, 4)][randInt(0, 4)] = Math.pow(2, randInt(0, 12));
-        animateMovement("32", {x: 110 * 2, y: 110 * 1}, ANIMATIONTIMEMOVE);
+    move (method) {
+        this.newSquare();
+        
+    }
+
+    // places a random 2 or 4 on the board
+    newSquare () {
+
+        // initializes possible spots 
+        let spots = new Array();
+
+        // gets possible spots for the new number and adds to array
+        for (let y = 0; y < 4; y++) {
+            for (let x = 0; x < 4; x++) {
+                if (this.board[y][x] === 1) {
+                    spots.push({y: y, x: x});
+                }
+            }
+        }
+
+        // checks for a game over
+        if (spots.length === 0) {
+            return false;
+        }
+
+        // gets a random spot
+        let spot = spots[randInt(0, spots.length)];
+
+        // randomly assigns the spot to be a 2 or a 4
+        this.board[spot.y][spot.x] = Math.random() > 0.75 ? 4 : 2;
+
+        // adds spot to the pop
+        this.pops.push(spot);
+
     }
 
     // displays the board onto the container
