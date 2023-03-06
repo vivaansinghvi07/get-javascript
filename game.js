@@ -1,5 +1,4 @@
 const NUMTOIMAGE = {
-    1: "empty",
     2: "c",
     4: "cpp",
     8: "php",
@@ -41,6 +40,11 @@ class Game {
         // goes through every square on the board
         for (let y = 0; y < 4; y++) {
             for (let x = 0; x < 4; x++) {
+
+                // skip if empty
+                if (this.board[y][x] === 1) {
+                    continue;
+                }
 
                 // gets the image being looked at
                 let filename = NUMTOIMAGE[this.board[y][x]];
