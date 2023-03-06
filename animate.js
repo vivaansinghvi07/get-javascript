@@ -14,9 +14,9 @@ function animatePop(id, time) {
         console.log("that");
 
         // animates the inflation
-        $("#" + id).animate({width: imageWidth + 10, height: imageWidth + 10, left: "5px", up: "5px"}, time/2);
+        $("#" + id).animate({width: imageWidth + 10, height: imageWidth + 10, left: "-=5px", top: "-=5px"}, time/2);
         // animates the deflation
-        $("#" + id).animate({width: imageWidth, height: imageWidth, right: "5px", down: "5px"}, time/2);
+        $("#" + id).animate({width: imageWidth, height: imageWidth, left: "+=5px", top: "+=5px"}, time/2);
         
     });
 }
