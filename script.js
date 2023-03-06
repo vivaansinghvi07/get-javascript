@@ -5,7 +5,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // gets the container in which the images are displayed in
     const CONTAINER = document.getElementById("container");
-    console.log(CONTAINER);
 
     // listens for a key press
     document.addEventListener("keydown", (event) => {
@@ -28,7 +27,9 @@ window.addEventListener("DOMContentLoaded", () => {
         // moves the board based on the key press
         else {
             game.move(["up", "down", "left", "right"][index % 4]);
-            game.display(CONTAINER);
+            setTimeout(function() {
+                game.display(CONTAINER);
+            }, animationTime);
         }
     })
 });
