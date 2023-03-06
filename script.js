@@ -6,17 +6,26 @@ window.addEventListener("DOMContentLoaded", () => {
     // gets the container in which the images are displayed in
     const CONTAINER = document.getElementById("container");
     console.log(CONTAINER);
-    
+
+    // listens for a key press
     document.addEventListener("keydown", (event) => {
+
+        // stores the possible event key names
         var moves = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+
+        // finds the index of the key press
         var index = moves.findIndex((option) => {
                         if (option === event.key) {
                             return true;
                         }
                     });
+
+        // if the press is not found, its not a valid move
         if (index === -1) {
             return false;
         }
+
+        // moves the board based on the key press
         else {
             game.move(["up", "down", "left", "right"][index]);
             game.display(CONTAINER);
