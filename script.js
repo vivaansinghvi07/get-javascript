@@ -1,12 +1,12 @@
+var game;
+
 window.addEventListener("DOMContentLoaded", () => {
 
     // gets the container in which the images are displayed in
     const CONTAINER = document.getElementById("container");
 
-    // setup a new game
-    var game = new Game();
-    game.move("up"); // random move -- doesnt matter
-    game.display(CONTAINER); // shows the game
+    // starts a new game
+    reset();
 
     // listens for a key press
     document.addEventListener("keydown", (event) => {
@@ -47,4 +47,11 @@ function randInt(min, max) {
 // shows the progression
 function showProgression() {
     document.getElementById("progression").innerHTML = "C &rarr; C++ &rarr; PHP &rarr; Rust &rarr; Ruby &rarr; Swift &rarr; Java &rarr; Python &rarr; TypeScript &rarr; JavaScript"
+}
+
+// resets the game
+function reset() {
+    game = new Game();
+    game.move("up");
+    game.display(document.getElementById("container"));
 }
