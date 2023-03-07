@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // moves the board based on the key press
         else {
-            game.move(["up", "down", "left", "right"][index % 4]);
+            game.controlMovement(["up", "down", "left", "right"][index % 4]);
             setTimeout(function() {
                 game.display(CONTAINER);
             }, ANIMATIONTIMEMOVE);
@@ -52,6 +52,6 @@ function showProgression() {
 // resets the game
 function reset() {
     game = new Game();
-    game.move("up");
+    game.controlMovement("up");
     game.display(document.getElementById("container"));
 }
