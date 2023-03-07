@@ -12,6 +12,7 @@ function animateMovement(id, newCoords, time) {
     });
 }
 
+// animates the little pop the square does when you combine values
 function animatePop(id, time) {
     $(document).ready(function() {
 
