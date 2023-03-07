@@ -39,6 +39,18 @@ class Game {
 
         // sets whether the game is over or not
         this.over = false;
+
+        // performs an arbitrary move
+        this.controlMovement("up");
+
+        let container = document.getElementById("container");
+        // displays game
+        this.display(container);
+
+        // unblurs container
+        container.removeAttribute("style");
+        
+
     }
     
     // controls movement with arrow keys
@@ -59,14 +71,13 @@ class Game {
         // adds a new square
         this.newSquare();
 
-        
-        // makes new square
+        // checks for game being over
         if (this.gameLost()) {
 
             // blurs the images and doesnt allow movement
             document.getElementById("container").setAttribute("style", "filter: blur(50px)");
             this.over = true;
-            
+
         } else if (this.gameWon()) {
             // TODO: special effect
             this.over = true;
@@ -75,8 +86,54 @@ class Game {
         
     }
 
+    // checks nearby squares for availability
+    checkNearby(y, x) {
+        // gets the value of the square
+        let val = this.board[y][x];
+
+        // checks if the value is empty
+        if (val === 1) {
+            return true;
+        }
+
+        // four sides of the square
+        let places = [{x: 0, y: 1}, {x: 0, y: -1}, {x: -1, y: 0}, {x: 1, y: 0}];
+
+        // cheks for similarities or 0s
+        places.forEach((place) => {
+            
+            // if error, we are out of bounds; just continue
+            try {
+                // gets the value at the spot
+                let testVal = this.board[y + place.y][x + place.x];
+
+                // checks if its the same or empty
+                if (testVal === val) {
+                    console.log(testVal, y, x, place);
+                    return true;
+                }
+            } catch (error) {}
+
+        });
+
+        // if we didn't return true, return false
+        return false;
+    }
+
+    // checks if the game is lost
     gameLost() {
-        // TODO: code this
+
+        // goes through every square and checks nearby it
+        for (let y = 0; y < 4; y++) {
+            for (let x = 0; x < 4; x++) {
+                if (this.checkNearby(y, x)) {
+                    return false;
+                }
+            }
+        }
+
+        // return false if nothing is available
+        return true;
     }
 
     gameWon() {
