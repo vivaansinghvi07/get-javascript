@@ -4,14 +4,15 @@
 const NUMTOIMAGE = {
     2: "c",
     4: "cpp",
-    8: "php",
-    16: "rust",
-    32: "ruby",
-    64: "swift",
-    128: "java",
-    256: "python",
-    512: "ts",
-    1024: "js"
+    8: "csharp",
+    16: "php",
+    32: "rust",
+    64: "ruby",
+    128: "swift",
+    256: "java",
+    512: "python",
+    1024: "ts",
+    2048: "js"
 };
 
 // sets constants for image displaying
