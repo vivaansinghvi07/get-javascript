@@ -140,8 +140,7 @@ class Game {
                     animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
 
                     // moves the available square forwards
-                    available.value = 1;
-                    available.x += xSign;
+                    available.value = val;
                 }
 
                 // finally, check if the spot in front of the available is empty 
@@ -154,8 +153,8 @@ class Game {
                     animateMovement(getId(y, x), {y: available.y, x: available.x + xSign}, ANIMATIONTIMEMOVE);
 
                     // changes avaible value
-                    available.value = 1;
-                    available.x += 2 * xSign;
+                    available.value = val;
+                    available.x += xSign;
                 } 
                 
                 // otherwise, move the available forwards
@@ -226,8 +225,7 @@ class Game {
                     animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
 
                     // moves the available square forwards
-                    available.value = 1;
-                    available.y += ySign;
+                    available.value = val;
                 }
 
                 // finally, check if the spot in front of the available is empty 
@@ -240,8 +238,8 @@ class Game {
                     animateMovement(getId(y, x), {y: available.y + ySign, x: available.x}, ANIMATIONTIMEMOVE);
 
                     // changes avaible value
-                    available.value = 1;
-                    available.y += 2 * ySign;
+                    available.value = val;
+                    available.y += ySign;
                 } 
                 
                 // otherwise, move the available forwards
