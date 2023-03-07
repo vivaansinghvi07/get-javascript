@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const CONTAINER = document.getElementById("container");
 
     // starts a new game
-    reset();
+    game = new Game();
 
     // listens for a key press
     document.addEventListener("keydown", (event) => {
@@ -58,6 +58,4 @@ function showProgression() {
 // resets the game
 function reset() {
     game = new Game();
-    game.controlMovement("up");
-    game.display(document.getElementById("container"));
 }
