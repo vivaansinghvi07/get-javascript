@@ -75,7 +75,7 @@ class Game {
         if (this.gameLost()) {
 
             // blurs the images and doesnt allow movement
-            document.getElementById("container").setAttribute("style", "filter: blur(50px)");
+            document.getElementById("container").setAttribute("style", "filter: blur(20px)");
             this.over = true;
 
         } else if (this.gameWon()) {
@@ -112,7 +112,6 @@ class Game {
 
                 // checks if its the same or empty
                 if (testVal === val) {
-                    console.log(testVal, y, x, place);
                     found = true;
                 }
             } catch (error) {}
@@ -342,7 +341,7 @@ class Game {
 
         // goes through everything that needs to be popped
         this.pops.forEach((element) => {
-            animatePop(element.y + "" + element.x, ANIMATIONTIMEPOP);
+            animatePop(getId(element.y, element.x), ANIMATIONTIMEPOP);
         });
 
         // clears pops 
