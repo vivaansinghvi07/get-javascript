@@ -42,7 +42,7 @@ class Game {
     }
     
     // controls movement with arrow keys
-    move (method) {
+    controlMovement (method) {
 
         // skips if game over
         if (this.over) {
@@ -82,6 +82,68 @@ class Game {
         // TODO: code this
     }
 
+    // runs a single move of a block
+    move (y, x, available, xSign, ySign) {
+        // stores the value in the spot
+        let val = this.board[y][x];
+
+        // if the value is 1 (empty), then skip
+        if (val === 1) {
+            return;
+        }
+
+        // if the values match, combine
+        else if (val === available.value) {
+            // perform move and increment value
+            this.board[y][x] = 1;
+            this.board[available.y][available.x] *= 2;
+
+            // performs animation and adds to pops
+            animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
+            this.pops.push({x: available.x, y: available.y});
+
+            // resets avaiable value
+            available.value = 1;
+            available.x += xSign;
+            available.y += ySign;
+        }
+        
+        // if they don't match, and the value is not 1, then check if the available is empty - if it is, move into it
+        else if (available.value === 1) {
+            // perform move to available square
+            this.board[y][x] = 1;
+            this.board[available.y][available.x] = val;
+
+            // performs animation
+            animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
+
+            // moves the available square forwards
+            available.value = val;
+        }
+
+        // finally, check if the spot in front of the available is empty 
+        else if (this.board[available.y + ySign][available.x + xSign] === 1) {
+            // perform move to available square
+            this.board[y][x] = 1;
+            this.board[available.y + ySign][available.x + xSign] = val;
+
+            // performs animation
+            animateMovement(getId(y, x), {y: available.y + ySign, x: available.x + xSign}, ANIMATIONTIMEMOVE);
+
+            // changes avaible value
+            available.value = val;
+            available.x += xSign;
+            available.y += ySign;
+        } 
+        
+        // otherwise, move the available forwards
+        else {
+            available.value = this.board[available.y + ySign][available.x + xSign];
+            available.x += xSign;
+            available.y += ySign;
+        }
+    }
+
     moveLeftRight(move) {
         // assigns starter values depending on the type of movement
         let xSign, start, end;
@@ -106,63 +168,9 @@ class Game {
             let available = {value: this.board[y][startX], x: startX, y: y};
 
             // goes through everything in the column (going up or going down)
-            for (let x = start; move === "left" ? x < end : x > end; x += xSign) {
-                
-                // stores the value in the spot
-                let val = this.board[y][x];
-
-                // if the value is 1 (empty), then skip
-                if (val === 1) {
-                    continue;
-                }
-
-                // if the values match, combine
-                else if (val === available.value) {
-                    // perform move and increment value
-                    this.board[y][x] = 1;
-                    this.board[available.y][available.x] *= 2;
-
-                    // performs animation and adds to pops
-                    animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
-                    this.pops.push({x: available.x, y: available.y});
-
-                    // resets avaiable value
-                    available.value = 1;
-                    available.x += xSign;
-                }
-                
-                // if they don't match, and the value is not 1, then check if the available is empty - if it is, move into it
-                else if (available.value === 1) {
-                    // perform move to available square
-                    this.board[y][x] = 1;
-                    this.board[available.y][available.x] = val;
-
-                    // performs animation
-                    animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
-
-                    // moves the available square forwards
-                    available.value = val;
-                }
-
-                // finally, check if the spot in front of the available is empty 
-                else if (this.board[available.y][available.x + xSign] === 1) {
-                    // perform move to available square
-                    this.board[y][x] = 1;
-                    this.board[available.y][available.x + xSign] = val;
-
-                    // performs animation
-                    animateMovement(getId(y, x), {y: available.y, x: available.x + xSign}, ANIMATIONTIMEMOVE);
-
-                    // changes avaible value
-                    available.value = val;
-                    available.x += xSign;
-                } 
-                
-                // otherwise, move the available forwards
-                else {
-                    available.value = this.board[available.y][available.x + xSign];
-                    available.x += xSign;
-                }
+            for (let x = start; move === "left" ? x < end : x > end; x += xSign) { 
+                // performs the move           
+                this.move(y, x, available, xSign, 0);
             }
         }
     }
@@ -193,61 +201,9 @@ class Game {
             // goes through everything in the column (going up or going down)
             for (let y = start; move === "up" ? y < end : y > end; y += ySign) {
                 
-                // stores the value in the spot
-                let val = this.board[y][x];
-
-                // if the value is 1 (empty), then skip
-                if (val === 1) {
-                    continue;
-                }
-
-                // if the values match, combine
-                else if (val === available.value) {
-                    // perform move and increment value
-                    this.board[y][x] = 1;
-                    this.board[available.y][available.x] *= 2;
-
-                    // performs animation and adds to pops
-                    animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
-                    this.pops.push({x: available.x, y: available.y});
-
-                    // resets avaiable value
-                    available.value = 1;
-                    available.y += ySign;
-                }
+                // performs the move
+                this.move(y, x, available, 0, ySign);
                 
-                // if they don't match, and the value is not 1, then check if the available is empty - if it is, move into it
-                else if (available.value === 1) {
-                    // perform move to available square
-                    this.board[y][x] = 1;
-                    this.board[available.y][x] = val;
-
-                    // performs animation
-                    animateMovement(getId(y, x), {y: available.y, x: available.x}, ANIMATIONTIMEMOVE);
-
-                    // moves the available square forwards
-                    available.value = val;
-                }
-
-                // finally, check if the spot in front of the available is empty 
-                else if (this.board[available.y + ySign][x] === 1) {
-                    // perform move to available square
-                    this.board[y][x] = 1;
-                    this.board[available.y + ySign][x] = val;
-
-                    // performs animation
-                    animateMovement(getId(y, x), {y: available.y + ySign, x: available.x}, ANIMATIONTIMEMOVE);
-
-                    // changes avaible value
-                    available.value = val;
-                    available.y += ySign;
-                } 
-                
-                // otherwise, move the available forwards
-                else {
-                    available.value = this.board[available.y + ySign][available.x];
-                    available.y += ySign;
-                }
             }
         }
     }
