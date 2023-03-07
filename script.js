@@ -46,7 +46,7 @@ function randInt(min, max) {
 
 // shows the progression
 function showProgression() {
-    document.getElementById("progression").innerHTML = "C &rarr; C++ &rarr; PHP &rarr; Rust &rarr; Ruby &rarr; Swift &rarr; Java &rarr; Python &rarr; TypeScript &rarr; JavaScript"
+    document.getElementById("progression").innerHTML = "C &rarr; C++ &rarr; C# &rarr; PHP &rarr; Rust &rarr; Ruby &rarr; Swift &rarr; Java &rarr; Python &rarr; TypeScript &rarr; JavaScript"
 }
 
 // resets the game
