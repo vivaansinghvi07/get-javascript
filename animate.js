@@ -3,11 +3,11 @@ function animateMovement(id, newCoords, time) {
     $(document).ready(function() {
 
         // applies multipliers
-        newCoords.x *= SIZEMULTIPLIER;
-        newCoords.y *= SIZEMULTIPLIER;
+        let x = newCoords.x * SIZEMULTIPLIER + SIZEINCREMENT;
+        let y = newCoords.y * SIZEMULTIPLIER + SIZEINCREMENT;
 
         // animates the movement
-        $("#" + id).animate({left: newCoords.x + "px", top: newCoords.y + "px"}, time);
+        $("#" + id).animate({left: x + "px", top: y + "px"}, time);
         
     });
 }

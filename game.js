@@ -14,8 +14,9 @@ const NUMTOIMAGE = {
     1024: "js"
 };
 
-// 100 px for the image, 10 px for the margin
+// sets constants for image displaying
 const SIZEMULTIPLIER = 110;
+const SIZEINCREMENT = 10;
 
 // sets the time for animation
 const ANIMATIONTIMEMOVE = 100;
@@ -289,8 +290,8 @@ class Game {
                 let filename = NUMTOIMAGE[this.board[y][x]];
 
                 // gets the margins of the image relative to the rest of the board: img size: 100px, margin: 10px
-                let top = y * (SIZEMULTIPLIER); // distance from top
-                let left = x * (SIZEMULTIPLIER); // distance from left
+                let top = y * SIZEMULTIPLIER + SIZEINCREMENT; // distance from top
+                let left = x * SIZEMULTIPLIER + SIZEINCREMENT; // distance from left
                 
                 // creates a new image with specified characteristics
                 let img = document.createElement("img");
