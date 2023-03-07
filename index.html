@@ -10,9 +10,19 @@
     </head>
     <body>
         <header>Get Javascript!</header>
-        <p class = "description">
-            Based on the popular game <a href = "https://play2048.co">2048</a>, the objective of this game is to combine various programming languages to obtain JavaScript!
-        </p>
+        <div class = "description">
+            <p>
+                Based on the popular game <a href = "https://play2048.co">2048</a>, 
+                the objective of this game is to combine various programming languages to obtain JavaScript!
+            </p>
+            <p>
+                You can move with the arrow keys or WASD, but be careful: making any move 
+                (whether possible or not) adds a version of C to the board!
+            </p>
+            <p id = "progression" onclick = "show(); return false">
+                Click to show progression.
+            </p>
+        </div>
         <div class = "game" id = "container">
             
         </div>
