@@ -27,7 +27,7 @@ const ANIMATIONTIMEPOP = 80;
 const IMAGEWIDTH = 80;
 
 class Game {
-    constructor(container) {
+    constructor(container, result) {
         // creates the board for play
         this.board = [[1, 1, 1, 1],
                       [1, 1, 1, 1],
@@ -49,11 +49,13 @@ class Game {
         // unblurs container
         container.removeAttribute("style");
         
+        // unprints result
+        result.innerHTML = null;
 
     }
     
     // controls movement with arrow keys
-    controlMovement (method, container) {
+    controlMovement (method, result) {
 
         // skips if game over
         if (this.over) {
@@ -73,17 +75,20 @@ class Game {
         // checks for game being over
         if (this.gameLost()) {
 
-            // blurs the images and doesnt allow movement
-            container.setAttribute("style", "filter: blur(20px)");
+            // prints loss message
+            result.innerHTML = "You lost!";
+            result.style.color = "#000000";
 
-            // creates a txt element
-            let div = document.createElement("div");
-            div.innerHTML = "You Lost!";
-
+            // sets game to be over
             this.over = true;
 
         } else if (this.gameWon()) {
-            // TODO: special effect
+            
+            // prints win message
+            result.innerHTML = "You win!";
+            result.style.color = "#d4af37";
+
+            // sets game to be over
             this.over = true;
         }
 

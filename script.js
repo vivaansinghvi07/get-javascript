@@ -2,11 +2,12 @@ var game;
 
 window.addEventListener("DOMContentLoaded", () => {
 
-    // gets the container in which the images are displayed in
+    // gets the container in which the images are displayed in, and the place where the result of the game is printed
     const CONTAINER = document.getElementById("container");
+    const RESULT = document.getElementById("result");
 
     // starts a new game
-    game = new Game(CONTAINER);
+    game = new Game(CONTAINER, RESULT);
 
     // listens for a key press
     document.addEventListener("keydown", (event) => {
@@ -30,7 +31,7 @@ window.addEventListener("DOMContentLoaded", () => {
         else {
 
             // gets the way to move based on the index (modulus to tolerate WASD)
-            game.controlMovement(["up", "down", "left", "right"][index % 4], CONTAINER);
+            game.controlMovement(["up", "down", "left", "right"][index % 4], RESULT);
 
             // waits for the moving animations
             setTimeout(function() {
@@ -57,5 +58,5 @@ function showProgression() {
 
 // resets the game
 function reset() {
-    game = new Game(document.getElementById("container"));
+    game = new Game(document.getElementById("container"), document.getElementById("result"));
 }
