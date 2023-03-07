@@ -99,6 +99,9 @@ class Game {
         // four sides of the square
         let places = [{x: 0, y: 1}, {x: 0, y: -1}, {x: -1, y: 0}, {x: 1, y: 0}];
 
+        // stores if a things has been found
+        let found = false;
+
         // cheks for similarities or 0s
         places.forEach((place) => {
             
@@ -110,14 +113,14 @@ class Game {
                 // checks if its the same or empty
                 if (testVal === val) {
                     console.log(testVal, y, x, place);
-                    return true;
+                    found = true;
                 }
             } catch (error) {}
 
         });
 
         // if we didn't return true, return false
-        return false;
+        return found;
     }
 
     // checks if the game is lost
