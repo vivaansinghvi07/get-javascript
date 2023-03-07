@@ -41,3 +41,8 @@ window.addEventListener("DOMContentLoaded", () => {
 function randInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
+
+// shows the progression
+function showProgression() {
+    document.getElementById("progression").innerHTML = "C -> C++ -> PHP -> Rust -> Ruby -> Swift -> Java -> Python -> TypeScript -> JavaScript"
+}
