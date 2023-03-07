@@ -35,28 +35,50 @@ class Game {
 
         // initializes a new array of things that will be pop animated
         this.pops = new Array();
+
+        // sets whether the game is over or not
+        this.over = false;
     }
     
     // controls movement with arrow keys
     move (method) {
 
+        // skips if game over
+        if (this.over) {
+            return false;
+        }
+
         // controls up-down movement
         if (method === "up" || method === "down") {
-            // stores the available square for movement
             this.moveUpDown(method);
         }
         else {
             this.moveLeftRight(method);
         }
 
+        // adds a new square
+        this.newSquare();
+
+        
         // makes new square
-        if (!this.newSquare()) {
-            // TODO: code game over
-            console.log("Lost");
-            return false;
+        if (this.gameLost()) {
+            document.getElementById("container").setAttribute("style", "filter: blur(50px)");
+            this.over = true;
+        }
+        else if (this.gameWon()) {
+            // TODO: special effect
+            this.over = true;
         }
 
         
+    }
+
+    gameLost() {
+        // TODO: code this
+    }
+
+    gameWon() {
+        // TODO: code this
     }
 
     moveLeftRight(move) {
