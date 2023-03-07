@@ -52,8 +52,7 @@ class Game {
         // controls up-down movement
         if (method === "up" || method === "down") {
             this.moveUpDown(method);
-        }
-        else {
+        } else {
             this.moveLeftRight(method);
         }
 
@@ -63,10 +62,12 @@ class Game {
         
         // makes new square
         if (this.gameLost()) {
+
+            // blurs the images and doesnt allow movement
             document.getElementById("container").setAttribute("style", "filter: blur(50px)");
             this.over = true;
-        }
-        else if (this.gameWon()) {
+            
+        } else if (this.gameWon()) {
             // TODO: special effect
             this.over = true;
         }
@@ -147,12 +148,13 @@ class Game {
     moveLeftRight(move) {
         // assigns starter values depending on the type of movement
         let xSign, start, end;
+
+        // goes left to right if move is left; otherwise, go right to left
         if (move === "left") {
             xSign = 1;
             start = 1;
             end = 4;
-        }
-        else {
+        } else {
             xSign = -1;
             start = 2;
             end = -1;
@@ -178,12 +180,13 @@ class Game {
 
         // assigns starter values depending on the type of movement
         let ySign, start, end;
+
+        // goes up to down if moving up; otherwise down to up
         if (move === "up") {
             ySign = 1;
             start = 1;
             end = 4;
-        }
-        else {
+        } else {
             ySign = -1;
             start = 2;
             end = -1;
