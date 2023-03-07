@@ -1,3 +1,3 @@
 layout: page
 title: "game"
-permalink: /index.html
+permalink: /indx.html
