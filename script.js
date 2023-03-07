@@ -28,10 +28,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // moves the board based on the key press
         else {
+
+            // gets the way to move based on the index (modulus to tolerate WASD)
             game.controlMovement(["up", "down", "left", "right"][index % 4]);
+
+            // waits for the moving animations
             setTimeout(function() {
                 game.display(CONTAINER);
             }, ANIMATIONTIMEMOVE);
+
+            // waits for the pop animation
             setTimeout(function() {
                 return;
             }, ANIMATIONTIMEPOP);
