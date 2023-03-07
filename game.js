@@ -27,7 +27,7 @@ const ANIMATIONTIMEPOP = 80;
 const IMAGEWIDTH = 80;
 
 class Game {
-    constructor() {
+    constructor(container) {
         // creates the board for play
         this.board = [[1, 1, 1, 1],
                       [1, 1, 1, 1],
@@ -43,7 +43,6 @@ class Game {
         // performs an arbitrary move
         this.controlMovement("up");
 
-        let container = document.getElementById("container");
         // displays game
         this.display(container);
 
@@ -54,7 +53,7 @@ class Game {
     }
     
     // controls movement with arrow keys
-    controlMovement (method) {
+    controlMovement (method, container) {
 
         // skips if game over
         if (this.over) {
@@ -75,7 +74,12 @@ class Game {
         if (this.gameLost()) {
 
             // blurs the images and doesnt allow movement
-            document.getElementById("container").setAttribute("style", "filter: blur(20px)");
+            container.setAttribute("style", "filter: blur(20px)");
+
+            // creates a txt element
+            let div = document.createElement("div");
+            div.innerHTML = "You Lost!";
+
             this.over = true;
 
         } else if (this.gameWon()) {
@@ -138,8 +142,19 @@ class Game {
         return true;
     }
 
+    // checks if a game is won
     gameWon() {
-        // TODO: code this
+        
+        // goes through every square and checks for a 2048
+        for (let y = 0; y < 4; y++) {
+            for (let x = 0; x < 4; x++) {
+                if (this.board[y][x] === 2048) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     // runs a single move of a block
