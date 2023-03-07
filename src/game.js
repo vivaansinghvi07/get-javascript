@@ -348,7 +348,7 @@ class Game {
                 
                 // creates a new image with specified characteristics
                 let img = document.createElement("img");
-                img.setAttribute("src", "/imgs/" + filename + ".png");
+                img.setAttribute("src", "imgs/" + filename + ".png");
                 img.setAttribute("class", "image");
                 img.setAttribute("id", y + "" + x);
                 img.style.top = String(top) + "px";
