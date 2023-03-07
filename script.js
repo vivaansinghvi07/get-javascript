@@ -1,10 +1,12 @@
-// creates a new game
-var game = new Game();
-
 window.addEventListener("DOMContentLoaded", () => {
 
     // gets the container in which the images are displayed in
     const CONTAINER = document.getElementById("container");
+
+    // setup a new game
+    var game = new Game();
+    game.move("up"); // random move -- doesnt matter
+    game.display(CONTAINER); // shows the game
 
     // listens for a key press
     document.addEventListener("keydown", (event) => {
