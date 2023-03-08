@@ -3,7 +3,7 @@ html, body {
     height: 90%;
     width: 960px;
     margin: 0px auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 header {
     margin-top: 50px;
@@ -47,4 +47,5 @@ header {
     width: 150px;
     text-align: center;
     font-size: 25px;
+    padding-bottom: 50px;
 }
