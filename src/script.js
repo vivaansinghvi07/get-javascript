@@ -13,7 +13,9 @@ window.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (event) => {
 
         // prevents scrolling
-        event.preventDefault();
+        if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(event.key) > -1) {
+            event.preventDefault();
+        }
 
         // stores the possible event key names
         var moves = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "s", "a", "d", "W", "S", "A", "D"];
