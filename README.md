@@ -1,11 +1,4 @@
-<style>
-    img[src$="#example"] {
-        margin: 10px;
-        border-radius: 5%;
-        width: 500px;
-        height: auto;
-    }
-</style>
+<link href = "style.css" rel = "stylesheet">
 
 # Get Javascript!
 A remake of the popular game 2048, in which the objective is to get Javascript! The game features a 4x4 grid, in which C or C++ will spawn after each move. Then, you can move the blocks and combine them if they are the same language! Reach the Javascript language to win.
