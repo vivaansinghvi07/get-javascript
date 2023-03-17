@@ -40,17 +40,23 @@ class Game {
         // sets whether the game is over or not
         this.over = false;
 
-        // performs an arbitrary move
-        this.controlMovement("up");
-
-        // displays game
-        this.display(container);
-
         // unblurs container
         container.removeAttribute("style");
         
         // unprints result
         result.innerHTML = null;
+
+        // creates the old board 
+        this.oldBoard = [[1, 1, 1, 1],
+                         [1, 1, 1, 1],
+                         [1, 1, 1, 1], // this random value is -1 so that the old board is not the same as the new board right at the start
+                         [1, 1, 1, 1]];
+            
+        // creates a blank square
+        this.newSquare();
+
+        // displays game
+        this.display(container);
 
     }
     
@@ -69,8 +75,20 @@ class Game {
             this.moveLeftRight(method);
         }
 
-        // adds a new square
-        this.newSquare();
+        // skips if the old board is the same as the new board
+        if (this.boardChanged()) {
+            
+            // adds a new square
+            this.newSquare();
+
+        }
+
+        // updates the old board to the new board
+        this.board.forEach((row, y) => {
+            row.forEach((number, x) => {
+                this.oldBoard[y][x] = number;
+            });
+        });
 
         // checks for game being over
         if (this.gameLost()) {
@@ -92,7 +110,27 @@ class Game {
             this.over = true;
         }
 
-        
+    }
+
+    // checks if the old board is the same as the new board
+    boardChanged() {
+
+        // initializes value to be false, assuming no change
+        let same = false;
+
+        // checks every number
+        this.board.forEach((row, y) => {
+            row.forEach((number, x) => {
+                // if any number is differnet, make the value true: it has changed
+                if (number != this.oldBoard[y][x]) {
+                    same = true;
+                }
+            });
+        });
+
+        // returns the value
+        return same;
+
     }
 
     // checks nearby squares for availability
@@ -159,6 +197,7 @@ class Game {
             }
         }
 
+        // returns false if there are no 2048's
         return false;
     }
 
