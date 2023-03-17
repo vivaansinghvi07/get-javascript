@@ -1,6 +1,3 @@
-// TODO: Make the move move the closest one to the edge: for example if you move left you move the one thats the smallest index left first, then whatever else is available
-// create an array of ids that need to be popped in the display and pop them in the display function after everything is done
-
 const NUMTOIMAGE = {
     2: "c",
     4: "cpp",
