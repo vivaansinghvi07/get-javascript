@@ -1,3 +1,4 @@
+// image file names based on number
 const NUMTOIMAGE = {
     2: "c",
     4: "cpp",
