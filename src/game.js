@@ -49,7 +49,7 @@ class Game {
         // creates the old board 
         this.oldBoard = [[1, 1, 1, 1],
                          [1, 1, 1, 1],
-                         [1, 1, 1, 1], // this random value is -1 so that the old board is not the same as the new board right at the start
+                         [1, 1, 1, 1], 
                          [1, 1, 1, 1]];
             
         // creates a blank square
