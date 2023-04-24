@@ -387,7 +387,7 @@ class Game {
                 let img = document.createElement("img");
                 img.setAttribute("src", "imgs/" + filename + ".png");
                 img.setAttribute("class", "image");
-                img.setAttribute("id", y + "" + x);
+                img.setAttribute("id", getId(y, x));
                 img.style.top = String(top) + "px";
                 img.style.left = String(left) + "px";
 
