@@ -21,11 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
         var moves = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "s", "a", "d", "W", "S", "A", "D"];
 
         // finds the index of the key press
-        var index = moves.findIndex((option) => {
-                        if (option === event.key) {
-                            return true;
-                        }
-                    });
+        var index = moves.indexOf(event.key)
 
         // if the press is not found, its not a valid move
         if (index === -1) {
