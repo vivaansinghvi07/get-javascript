@@ -38,9 +38,6 @@ class Game {
         // sets whether the game is over or not
         this.over = false;
 
-        // unblurs container
-        container.removeAttribute("style");
-        
         // unprints result
         result.innerHTML = null;
 
